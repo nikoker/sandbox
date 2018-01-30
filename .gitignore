@@ -1,4 +1,7 @@
 /build
 local.properties
 *.iml
-
+# Intellij
+*.iml
+.idea/
+.gradle/
