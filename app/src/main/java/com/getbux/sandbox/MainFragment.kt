@@ -14,19 +14,19 @@ class MainFragment : BaseFragment() {
     private val productId by lazy { arguments.getString(Arg.PRODUCT_ID) }
     private val backgroundColor by lazy { arguments.getInt(Arg.BACKGROUND_COLOR) }
 
-    private var viewBinding: FragmentMainBinding? = null
+    private lateinit var viewBinding: FragmentMainBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewBinding = FragmentMainBinding.inflate(inflater)
-        return viewBinding?.mainContainerView
+        viewBinding = FragmentMainBinding.inflate(inflater, container, false)
+        return viewBinding.mainContainerView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         val viewModel = ViewModelProviders.of(this, MainFragmentViewModel.Factory(productId)).get(MainFragmentViewModel::class.java)
-        viewBinding?.viewModel = viewModel
-        viewBinding?.setLifecycleOwner(this)
+        viewBinding.viewModel = viewModel
+        viewBinding.setLifecycleOwner(this)
         viewModel.backgroundColor.set(backgroundColor)
     }
 
